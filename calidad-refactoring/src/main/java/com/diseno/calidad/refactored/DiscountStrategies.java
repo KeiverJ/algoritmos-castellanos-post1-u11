@@ -1,9 +1,11 @@
 package com.diseno.calidad.refactored;
 
+import java.util.Map;
+
 /**
  * Fábrica de estrategias de descuento concretas.
  * Centraliza la resolución de código de descuento a estrategia
- * usando un switch expression de Java 17.
+ * usando un registro de estrategias basado en Map.
  */
 public final class DiscountStrategies {
 
@@ -46,18 +48,18 @@ public final class DiscountStrategies {
 
     /**
      * Resuelve la estrategia de descuento a partir del código proporcionado.
-     * Cada caso del switch tiene complejidad V(G) = 1.
+     * Usa un Map de registro para evitar switch/if-else y mantener V(G) = 1.
      *
      * @param code código de descuento (puede ser null)
      * @param repo repositorio de clientes para estrategia VIP
-     * @return estrategia correspondiente al código
+     * @return estrategia correspondiente al código, o noDiscount si es desconocido
      */
     public static DiscountStrategy fromCode(String code, CustomerRepository repo) {
-        return switch (code == null ? "" : code) {
-            case "PROMO10" -> fixed(0.10);
-            case "PROMO20" -> fixed(0.20);
-            case "VIP"     -> vip(repo, 0.30, 0.05);
-            default        -> noDiscount();
-        };
+        Map<String, DiscountStrategy> registry = Map.of(
+                "PROMO10", fixed(0.10),
+                "PROMO20", fixed(0.20),
+                "VIP", vip(repo, 0.30, 0.05)
+        );
+        return registry.getOrDefault(code == null ? "" : code, noDiscount());
     }
 }

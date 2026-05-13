@@ -54,7 +54,7 @@ class OrderPipelineTest {
     class ValidationTests {
 
         @Test
-        @DisplayName("Lanza NullPointerException si customerId es null")
+        @DisplayName("Lanza excepción si customerId es null")
         void testNullCustomerId() {
             OrderContext ctx = OrderContext.of(null,
                     List.of(new OrderItem(10.0, 1)),
@@ -76,7 +76,7 @@ class OrderPipelineTest {
         void testNullItems() {
             OrderContext ctx = OrderContext.of("C001", null,
                     null, "CASH", DEFAULT_ADDRESS, false);
-            assertThrows(IllegalArgumentException.class, () -> pipeline.execute(ctx));
+            assertThrows(NullPointerException.class, () -> pipeline.execute(ctx));
         }
 
         @Test

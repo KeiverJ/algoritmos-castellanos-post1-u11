@@ -2,32 +2,30 @@ package com.diseno.calidad.pipeline;
 
 import com.diseno.calidad.refactored.OrderContext;
 
-import java.util.Objects;
-
 /**
  * Etapa de validación del pipeline.
  * Verifica que el contexto de entrada tenga los datos mínimos requeridos.
- * V(G) esperado: 3 (tres caminos: null, blank, items vacíos).
+ * Cada método auxiliar tiene V(G) &lt;= 3 según PMD.
  */
 public class ValidationStage implements Stage<OrderContext> {
 
     /**
-     * Valida que el customerId no sea nulo ni vacío y que los ítems no estén vacíos.
+     * Valida que el contexto tenga un cliente y ítems válidos.
      *
      * @param ctx contexto de pedido a validar
      * @return el mismo contexto si la validación es exitosa
-     * @throws NullPointerException     si customerId es null
-     * @throws IllegalArgumentException si customerId está vacío o items están vacíos
+     * @throws IllegalArgumentException si los datos son inválidos
      */
     @Override
     public OrderContext process(OrderContext ctx) {
-        Objects.requireNonNull(ctx.customerId(), "customerId requerido");
+        java.util.Objects.requireNonNull(ctx.customerId(), "customerId requerido");
+        java.util.Objects.requireNonNull(ctx.items(), "items no pueden ser null");
 
         if (ctx.customerId().isBlank()) {
-            throw new IllegalArgumentException("customerId no puede estar vacío");
+            throw new IllegalArgumentException("customerId vacío");
         }
-        if (ctx.items() == null || ctx.items().isEmpty()) {
-            throw new IllegalArgumentException("items no pueden estar vacíos");
+        if (ctx.items().isEmpty()) {
+            throw new IllegalArgumentException("items vacíos");
         }
 
         return ctx;
