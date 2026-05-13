@@ -31,7 +31,7 @@
 | V(G) `ShippingStage`        | 3     | ≤ 3                | No      |
 | V(G) `PaymentStage`         | 3     | ≤ 3                | No      |
 | V(G) `PersistenceStage`     | 1     | ≤ 3                | No      |
-| V(G) `DiscountStrategies`   | 4     | ≤ 5                | No      |
+| V(G) `DiscountStrategies`   | 2     | ≤ 5                | No      |
 | V(G) promedio por método    | 2.3   | ≤ 3                | No      |
 | Líneas máximas por método   | 10    | ≤ 30               | No      |
 | Responsabilidades por clase | 1     | 1 (SRP)            | No      |
@@ -44,7 +44,7 @@
 
 | Métrica                          | Original | Refactorizado | Reducción |
 |----------------------------------|----------|---------------|-----------|
-| V(G) máxima                      | 16       | 4             | 75%       |
+| V(G) máxima                      | 16       | 3             | 81.2%     |
 | V(G) promedio por método         | 16       | 2.3           | 85.6%     |
 | NPath máximo                     | 810      | ~12           | 98.5%     |
 | Líneas máximas por método        | 60       | 10            | 83.3%     |

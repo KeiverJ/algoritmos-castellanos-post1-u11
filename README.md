@@ -177,7 +177,7 @@ cada una con responsabilidad única y V(G) ≤ 3:
 
 | Métrica            | Original | Refactorizado | Reducción |
 | ------------------ | -------- | ------------- | --------- |
-| V(G) máxima        | 16       | 4             | 75%       |
+| V(G) máxima        | 16       | 3             | 81.2%     |
 | V(G) promedio      | 16       | 2.3           | 85.6%     |
 | NPath máximo       | 810      | ~12           | 98.5%     |
 | Líneas/método máx. | 60       | 10            | 83.3%     |
